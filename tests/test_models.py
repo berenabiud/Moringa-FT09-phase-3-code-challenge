@@ -13,8 +13,25 @@ class TestModels(unittest.TestCase):
         self.assertEqual(article.title, "Test Title")
 
     def test_magazine_creation(self):
-        magazine = Magazine(1, "Tech Weekly")
+        magazine = Magazine(1, "Tech Weekly", "Technology") 
         self.assertEqual(magazine.name, "Tech Weekly")
+        self.assertEqual(magazine.category, "Technology")
+
+    def test_author_invalid_name(self):
+        with self.assertRaises(ValueError):
+            author = Author(2, "")
+
+    def test_article_invalid_title(self):
+        with self.assertRaises(ValueError):
+            article = Article(2, "Tiny", "Valid Content", 1, 1)
+
+    def test_magazine_invalid_name(self):
+        with self.assertRaises(ValueError):
+            magazine = Magazine(2, "", "Technology")
+
+    def test_article_invalid_title(self):
+        with self.assertRaises(ValueError):
+            article = Article(1, "", "Valid Content", 1, 1)
 
 if __name__ == "__main__":
     unittest.main()
